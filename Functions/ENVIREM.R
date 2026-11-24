@@ -1,4 +1,10 @@
 ###FUNCTIONS FOR CALCULATION OF ENVIREM VARIABLES-------------------------------
+# Adapted from the R package 'envirem' (Title & Bemmels, 2018) for execution in SAGA GIS via RSAGA.
+# Original package authors: Pascal O. Title and Jordan B. Bemmels
+# Original reference: Title, P. O., & Bemmels, J. B. (2018). ENVIREM: an expanded set of bioclimatic and
+#                     topographic variables increases flexibility and improves performance of ecological
+#                     niche modeling. Ecography, 41(2), 291-307. https://doi.org/10.1111/ecog.02880
+# License: GNU General Public License v3.0 (GPL-3.0)
 
 ###maximum temperature of coldest month-----------------------------------------
 maxTempColdest.SAGA <- function(tmean.paths, tmax.paths, saga.env, suffix="")
