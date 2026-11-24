@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use these scripts in your research, please cite this software archive as below."
-title: "R codes for statistical downscaling of CCSM3 (TraCE-21ka) paleoclimate simulations for Europe"
+title: "R scripts for statistical downscaling of CCSM3 (TraCE-21ka) paleoclimate simulations over Europe"
 version: 1.0.0
 date-released: 2026-11-24
 license: GPL-3.0
