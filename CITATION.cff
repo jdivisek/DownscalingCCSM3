@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use these scripts in your research, please cite this software archive as below."
+title: "R scripts for statistical downscaling of CCSM3 (TraCE-21ka) paleoclimate simulations for Europe"
+version: 1.0.0
+date-released: 2026-11-24
+license: GPL-3.0
+repository-code: "https://github.com/jdivisek/DownscalingCCSM3"
+authors:
+  - family-names: "<Divíšek>"
+    given-names: "<Jan>"
+    orcid: "https://orcid.org/0000-0002-5127-5130"
+abstract: >-
+  R workflow using SAGA GIS (via RSAGA) for statistical downscaling of transient CCSM3
+  (TraCE-21ka) paleoclimate simulations (21,000 BP to present in 100-year time windows)
+  to high spatial resolution (30 arc-seconds) using CHELSA reference climatology, and 
+  computation of 19 BIOCLIM and 16 ENVIREM variables for Europe.
+keywords:
+  - paleoclimate
+  - statistical downscaling
+  - TraCE-21ka
+  - CCSM3
+  - CHELSA
+  - BIOCLIM
+  - ENVIREM
+  - SAGA GIS
+  - R
