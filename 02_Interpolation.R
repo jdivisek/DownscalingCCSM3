@@ -1,4 +1,4 @@
-###INTERPOLATE TEMPERATURES AND PRECIPITATION IN AREAS CURRENTLY UNDER THE SEA LEVEL-------------------------------------------------------
+###INTERPOLATE TEMPERATURES AND PRECIPITATION IN AREAS CURRENTLY UNDER THE SEA LEVEL--------------------------------
 library(raster)
 library(RSAGA)
 library(stringr)

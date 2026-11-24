@@ -1,5 +1,5 @@
-###PPREPARE BASELINE CLIMATE DATA-------------------------------------------------------------
-##Create 50-yrs average based on CHELSA Timeseries and CHELSAcrtuts datasets
+###PPREPARE BASELINE CLIMATE DATA-----------------------------------------------
+##Create 50-yrs average based on CHELSA Timeseries and CHELSAcruts datasets
 library(RSAGA)
 library(raster)
 library(stringr)
@@ -16,7 +16,7 @@ rsaga.get.libraries(path = saga.env$modules)
 rsaga.get.modules("io_gdal", env = saga.env)
 rsaga.get.usage("grid_calculus", 1, env = saga.env)
 
-###AVERAGE CHELSAcruts TMIN AND TMAX-----------------------------------------------------------------------------------
+###AVERAGE CHELSAcruts TMIN AND TMAX--------------------------------------------
 tmin.paths <- list.files(paste0(getwd(), "/GIS_database/CHELSAcruts/tmin"), full.names = T)
 names(tmin.paths) <- list.files(paste0(getwd(), "/GIS_database/CHELSAcruts/tmin"), full.names = F)
 tmax.paths <- list.files(paste0(getwd(), "/GIS_database/CHELSAcruts/tmax"), full.names = T)
@@ -52,8 +52,8 @@ for(i in seq(1, length(tmin.paths)))
 }
 Sys.time()
 
-###CONVERT CHELSA TIMESERIES FROM KELVIN TO C*10-------------------------------------------------------
-##Mean monthly temperature-------------------------------------------------------------------------------------
+###CONVERT CHELSA TIMESERIES FROM KELVIN TO C*10--------------------------------
+##Mean monthly temperature------------------------------------------------------
 tmean.paths <- list.files(paste0(getwd(), "/GIS_database/CHELSA Timeseries/tmean"), full.names = T)
 names(tmean.paths) <- list.files(paste0(getwd(), "/GIS_database/CHELSA Timeseries/tmean"), full.names = F)
 
@@ -88,7 +88,7 @@ for(i in seq(1, length(tmean.paths)))
 }
 Sys.time()
 
-##Maximum monthly temperature-------------------------------------------------------------------------------------
+##Maximum monthly temperature---------------------------------------------------
 tmax.paths <- list.files(paste0(getwd(), "/GIS_database/CHELSA Timeseries/tmax"), full.names = T)
 names(tmax.paths) <- list.files(paste0(getwd(), "/GIS_database/CHELSA Timeseries/tmax"), full.names = F)
 
@@ -123,7 +123,7 @@ for(i in seq(1, length(tmax.paths)))
 }
 Sys.time()
 
-##Minimum monthly temperature-------------------------------------------------------------------------------------
+##Minimum monthly temperature---------------------------------------------------
 tmin.paths <- list.files(paste0(getwd(), "/GIS_database/CHELSA Timeseries/tmin"), full.names = T)
 names(tmin.paths) <- list.files(paste0(getwd(), "/GIS_database/CHELSA Timeseries/tmin"), full.names = F)
 

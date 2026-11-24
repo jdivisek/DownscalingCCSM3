@@ -4,7 +4,7 @@ library(RSAGA)
 library(stringr)
 library(envirem)
 
-###paths to donwcaled layers
+###paths to downscaled layers
 ##mean temperature
 tmean.paths <- list()
 tmean.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/01_Jan"), pattern = '\\.tif$', full.names=TRUE)
@@ -139,7 +139,7 @@ for(i in seq(1, length(tw)))
 }
 
 ###CALCULATE BIOCLIM AND ENVIREM VARIABLES--------------------------------------
-#require SAGA GIS 6.3.0 to calculate bio12 as sum of monthly precipitation amounts 
+#require SAGA GIS 6.3.0 to calculate bio12 as a sum of monthly precipitation amounts 
 #SAGA 2.3.1 calculates bio12 as arithmetic mean
 
 saga.env <- rsaga.env()
@@ -192,7 +192,7 @@ for(i in seq(1,210))#loop for 100 yrs time windows
   {
     cat("", "\n", paste0("Calculating envirem variables for ", tw[i], " BP"), "\n")
     
-    ##create paths to bioclimatic variables
+    ##create paths to bioclim variables
     bio1.path <- paste0(bio.paths[i], "/bio1_", tw[i], "BP.sgrd")
     bio5.path <- paste0(bio.paths[i], "/bio5_", tw[i], "BP.sgrd")
     bio6.path <- paste0(bio.paths[i], "/bio6_", tw[i], "BP.sgrd")

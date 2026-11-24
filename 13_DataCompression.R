@@ -3,7 +3,7 @@ library(raster)
 library(stringr)
 library(RSAGA)
 
-###Paths to bioclimatic and envirem variables
+###Paths to bioclim and envirem variables
 tw <- seq(50, 20950, 100)
 bio.paths <- list()
 bio.names <- paste0("bio", 1:19)

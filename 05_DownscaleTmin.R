@@ -76,7 +76,7 @@ bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmin", 
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
-###DEBIASING AND DOWSCALING CCSM3 SIMULATIONS-----------------------------------
+###DEBIASING AND DOWNSCALING CCSM3 SIMULATIONS----------------------------------
 m.paths <- list()
 m.paths[[1]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmin/01_Jan", sep = ""), pattern='txt', full.names=TRUE)
 m.paths[[2]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmin/02_Feb", sep = ""), pattern='txt', full.names=TRUE)
@@ -128,7 +128,7 @@ for(q in 1:12)##loop for 12 months
 {
   print(paste("*******************************", month.name[q], "*******************************", sep= " "))
   
-  ##find cells closest to avegage
+  ##find cells closest to average
   chelsa <- raster(gsub("sgrd", "sdat", ch.paths[q]), native=T)
   projection(chelsa) <- CRS("+proj=longlat +datum=WGS84")
   avg.points <- getAvgPoints(r=chelsa, fact=300, fact2=30, res=2.5, ext=extent(c(-32.5,70,32.5,82.5)), fun=mean)

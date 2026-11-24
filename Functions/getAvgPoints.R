@@ -26,7 +26,7 @@ getAvgPoints <- function(r, fact, fact2, res, ext, fun)
       rc <- crop(r, extent(c(x.step[i], x.step[i]+res, y.step[q]-res, y.step[q])))
       rc <- abs(rc - getValues(ag, q)[i])
       
-      #find region with minumum difference from mean
+      #find region with minimum difference from mean
       rc2 <- aggregate(rc, fact=fact2, fun=sum)
       rc2[rc2 > minValue(rc2)] <- NA
       rc2 <- trim(rc2)

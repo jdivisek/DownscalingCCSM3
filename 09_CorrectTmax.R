@@ -19,7 +19,7 @@ bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmax"),
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
-###DEBIASING AND DOWSCALING CCSM3 SIMULATIONS-----------------------------------
+###DEBIASING AND DOWNSCALING CCSM3 SIMULATIONS----------------------------------
 m.paths <- list()
 m.paths[[1]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmax/01_Jan"), pattern='txt', full.names=TRUE)
 m.paths[[2]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmax/02_Feb"), pattern='txt', full.names=TRUE)
