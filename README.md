@@ -4,17 +4,23 @@ Here, I provide R codes for downscaling and debiasing CCSM3 simulations of month
 
 Gridded paleoclimate simulations at a resolution of 2.5° used here come from the TraCE-21ka experiment, which uses the Community Climate System Model version 3 (CCSM3; Collins et al., 2006); a global coupled atmosphere–ocean–sea ice–land general circulation model. The data were accessed through [PaleoView](https://github.com/GlobalEcologyLab/PaleoView) software version 1.5.1 (Fordham et al., 2017). The data cover the European continent and adjacent regions within the following boundaries: 32.5°W–70°E and 32.5°N–82.5°N. The centennial (100-year) windows are centered on calendar centuries, with the most recent window, 100–0 BP, corresponding to 1850–1950 CE and centered on 50 BP, i.e. 1900 CE.
 
-Baseline climate data used for downscaling and debiasing CCSM3 simulations come from CHELSA timeseries and CHELSAcruts datasets (Karger et al., 2017), which were used to calculate 50-year average for the period from 1940 to 1989 CE.
+Baseline climate data used for downscaling and debiasing CCSM3 simulations come from CHELSA timeseries and CHELSAcruts datasets (Karger et al., 2017), which were used to calculate 50-year average for the period 1940–1989 CE.
 
-The downscaling procedure uses the change-factor approach (Ramirez Villejas & Jarvis, 2010) and the resulting grids are at a spatial resolution of 30 arc-seconds (\~1 km). BIOCLIM variables were calculated using the Bioclimatic Variables tool in [SAGA](https://saga-gis.sourceforge.io/en/index.html) 6.3.0, and ENVIREM variables using custom functions (based on the RSAGA package) provided here.
+The downscaling procedure uses the change-factor approach (Ramirez Villejas & Jarvis, 2010) and the resulting grids are at a spatial resolution of 30 arc-seconds (\~1 km). BIOCLIM variables were calculated using the Bioclimatic Variables tool in [SAGA](https://saga-gis.sourceforge.io/en/index.html) 6.3.0, and ENVIREM variables using custom functions (based on the RSAGA package) provided here. All codes were run in R software version 3.6.0 (R Core Team, 2022) using RSAGA (Brenning et al., 2018) and raster (Hijmans, 2019) packages.
 
 **References**
 
+- Brenning, A., Bangs, D., and Becker, M. (2018) RSAGA: SAGA geoprocessing and terrain analysis, CRAN. <https://CRAN.R-project.org/package=RSAGA>.
+
 - Fordham, D.A., Saltré, F., Haythorne, S., Wigley, T.M.L., Otto‐Bliesner, B.L., Chan, K.C. & Brook, B.W. (2017) PaleoView: a tool for generating continuous climate projections spanning the last 21 000 years at regional and global scales. *Ecography*, 40, 1348–1358.
+
+- Hijmans, R. J. (2019) raster: geographic data analysis and modeling, CRAN. [https://CRAN.R-project.org/package=raster](https://CRAN.R-project.org/package=raster,).
 
 - Karger, D.N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza, R.W., Zimmermann, N.E., Linder, H.P. & Kessler, M. (2017) Climatologies at high resolution for the earth’s land surface areas. *Scientific Data*, 4, 170122.
 
 - Nix, H.A. (1986) A Biogeographic Analysis of Australian Elapid Snakes. *Atlas of Elapid Snakes of Australia Australian Flora and Fauna* Series 7., pp. 4–15. Australian Government Publishing Service, Canberra.
+
+- R Core Team (2022) R: A language and environment for statistical computing. Vienna, Austria. [https://www.r-project.org/](https://www.r-project.org/,).
 
 - Ramirez Villejas, J. & Jarvis, A. (2010) Downscaling Global Circulation Model Outputs: The Delta Method Decision and Policy Analysis Working Paper No. 1. International Center for Tropical Agriculture (CIAT). Cali. CO.
 

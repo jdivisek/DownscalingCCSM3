@@ -4,6 +4,11 @@ library(raster)
 library(stringr)
 library(RSAGA)
 
+dir.create(paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/bioclim/bio2_corrected"), recursive = TRUE, showWarnings = FALSE)
+dir.create(paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/bioclim/bio3_corrected"), recursive = TRUE, showWarnings = FALSE)
+dir.create(paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/FOR_SHARING/bio2_corrected"), recursive = TRUE, showWarnings = FALSE)
+dir.create(paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/FOR_SHARING/bio3_corrected"), recursive = TRUE, showWarnings = FALSE)
+
 ###Correct bio2-----------------------------------------------------------------
 tw <- seq(50, 20950, 100)
 
