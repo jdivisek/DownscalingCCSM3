@@ -1,6 +1,6 @@
-###DEFINE FUNCTIONS FOR CALCULATION OF ENVIREM VARIABLES--------------------------------------------------------------------------
+###FUNCTIONS FOR CALCULATION OF ENVIREM VARIABLES-------------------------------
 
-###maximum temperature of coldest month--------------------------------------------------------
+###maximum temperature of coldest month-----------------------------------------
 maxTempColdest.SAGA <- function(tmean.paths, tmax.paths, saga.env, suffix="")
 {
   require(RSAGA)
@@ -28,7 +28,7 @@ maxTempColdest.SAGA <- function(tmean.paths, tmax.paths, saga.env, suffix="")
   file.remove(list.files(path = saga.env$workspace, pattern = "coldestMonth", full.names = T))
 }
 
-###minimum temperature of warmest month--------------------------------------------------------
+###minimum temperature of warmest month-----------------------------------------
 minTempWarmest.SAGA <- function(tmean.paths, tmin.paths, saga.env, suffix="")
 {
   require(RSAGA)
@@ -56,7 +56,7 @@ minTempWarmest.SAGA <- function(tmean.paths, tmin.paths, saga.env, suffix="")
   file.remove(list.files(path = saga.env$workspace, pattern = "warmestMonth", full.names = T))
 }
 
-##monthlyPET----------------------------------------------------------------------------------
+##monthlyPET--------------------------------------------------------------------
 monthlyPET.SAGA <- function(tmean.paths, tmin.paths, tmax.paths, solrad.paths, saga.env)
 {
   require(RSAGA)
@@ -78,7 +78,7 @@ monthlyPET.SAGA <- function(tmean.paths, tmin.paths, tmax.paths, solrad.paths, s
   }
 }
 
-###annualPET-----------------------------------------------------------------------------------
+###annualPET--------------------------------------------------------------------
 annualPET.SAGA <- function(pet.paths, saga.env, suffix="")
 {
   require(RSAGA)
@@ -88,7 +88,7 @@ annualPET.SAGA <- function(pet.paths, saga.env, suffix="")
                                               RESULT=paste0("annualPET", suffix, ".sgrd")), env=saga.env, show.output.on.console=F)
 }
 
-###PETTempQuarter---------------------------------------------------------------------------
+###PETTempQuarter---------------------------------------------------------------
 PETTempQuarter.SAGA <- function(pet.paths, tmean.paths, saga.env, vars=c("PETColdestQuarter", "PETWarmestQuarter"), suffix="")
 {
   require(RSAGA)
@@ -169,7 +169,7 @@ PETTempQuarter.SAGA <- function(pet.paths, tmean.paths, saga.env, vars=c("PETCol
   
 }
 
-###PETMoistQuarter-----------------------------------------------------------------------------------------------------------------------------------------
+###PETMoistQuarter--------------------------------------------------------------
 PETMoistQuarter.SAGA <- function(pet.paths, prec.paths, saga.env, vars=c("PETDriestQuarter", "PETWettestQuarter"), suffix="")
 {
   require(RSAGA)
@@ -250,7 +250,7 @@ PETMoistQuarter.SAGA <- function(pet.paths, prec.paths, saga.env, vars=c("PETDri
   
 }
 
-###PETseasonality--------------------------------------------------------------------------------------------
+###PETseasonality---------------------------------------------------------------
 PETseasonality.SAGA <- function(pet.paths, saga.env, suffix="")
 {
   require(RSAGA)
@@ -265,7 +265,7 @@ PETseasonality.SAGA <- function(pet.paths, saga.env, suffix="")
   file.remove(list.files(path = saga.env$workspace, pattern = "StdDev", full.names = T))
 }
 
-###climaticMoistureIndex-------------------------------------------------------------------------------------
+###climaticMoistureIndex--------------------------------------------------------
 climaticMoistureIndex.SAGA <- function(bio12.path, annualPET, saga.env, suffix="")
 {
   require(RSAGA)
@@ -287,7 +287,7 @@ climaticMoistureIndex.SAGA <- function(bio12.path, annualPET, saga.env, suffix="
   
 }
 
-###growingDegDays------------------------------------------------------------------------------------------
+###growingDegDays---------------------------------------------------------------
 growingDegDays.SAGA <- function(tmean.paths, baseTemp, saga.env, suffix="")
 {
   require(RSAGA)
@@ -305,7 +305,7 @@ growingDegDays.SAGA <- function(tmean.paths, baseTemp, saga.env, suffix="")
                                               FORMULA=f), env=saga.env, show.output.on.console=F)
 }
 
-###monthCountByTemp----------------------------------------------------------------------------------------
+###monthCountByTemp-------------------------------------------------------------
 
 monthCountByTemp.SAGA <- function(tmean.paths, minTemp, saga.env, suffix="")
 {
@@ -321,7 +321,7 @@ monthCountByTemp.SAGA <- function(tmean.paths, minTemp, saga.env, suffix="")
                                               FORMULA=f), env=saga.env, show.output.on.console=F)
 }
 
-###continentality------------------------------------------------------------------------------------------
+###continentality---------------------------------------------------------------
 continentality.SAGA <- function(tmean.paths, saga.env, suffix="")
 {
   require(RSAGA)
@@ -341,7 +341,7 @@ continentality.SAGA <- function(tmean.paths, saga.env, suffix="")
   file.remove(list.files(path = saga.env$workspace, pattern = "meantempColdest", full.names = T))
 }
 
-###aridityIndexThornthwaite---------------------------------------------------------------------------------
+###aridityIndexThornthwaite-----------------------------------------------------
 
 aridityIndexThornthwaite.SAGA <- function(prec.paths, pet.paths, saga.env, suffix="")
 {
@@ -374,7 +374,7 @@ aridityIndexThornthwaite.SAGA <- function(prec.paths, pet.paths, saga.env, suffi
   
 }
 
-###embergerQ------------------------------------------------------------------------------------------------
+###embergerQ--------------------------------------------------------------------
 embergerQ.SAGA <- function(bio12.path, bio5.path, bio6.path, saga.env, suffix="")
 {
   require(RSAGA)
@@ -391,7 +391,7 @@ embergerQ.SAGA <- function(bio12.path, bio5.path, bio6.path, saga.env, suffix=""
                                               FORMULA="2000 * g1 / ((g2 + g3 + 546.4) * (g2 - g3))"), env=saga.env, show.output.on.console=F)
 }
 
-####thermicityIndex-----------------------------------------------------------------------------------------
+####thermicityIndex-------------------------------------------------------------
 thermicityIndex.SAGA <- function(bio1.path, bio6.path, maxTempColdest, ci, saga.env, suffix="")
 {
   require(RSAGA)

@@ -1,11 +1,11 @@
-##IDENTIFY EXTREME TEMPERATURE ANOMALIES-------------------------------------------------
+##IDENTIFICATION OF EXTREME TEMPERATURE ANOMALIES-------------------------------
 
 library(raster)
 library(lvmisc)
 
-###MONTHLY MINIMUM TEMPERATURES----------------------------------------------------------
+###MONTHLY MINIMUM TEMPERATURES-------------------------------------------------
 ###Load bias files
-bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmin"), pattern='tif', full.names=TRUE))
+bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmin"), pattern='\\.tif$', full.names=TRUE))
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
@@ -34,7 +34,7 @@ for(i in 1:12)
 tw <- sort(tw)
 
 #load upscaled chelsa rasters
-obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmin"), pattern='tif', full.names=TRUE))
+obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmin"), pattern='\\.tif$', full.names=TRUE))
 projection(obs) <- CRS("+proj=longlat +datum=WGS84")
 plot(obs, main=month.name)
 
@@ -87,9 +87,9 @@ sum(unlist(lapply(tmin.ext[[4]], FUN=function(x){length(x)})) > 0)
 # 
 # plot(d)
 
-###MONTHLY MAXIMUM TEMPERATURES------------------------------------------------------
+###MONTHLY MAXIMUM TEMPERATURES-------------------------------------------------
 ###Bias files
-bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmax"), pattern='tif', full.names=TRUE))
+bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmax"), pattern='\\.tif$', full.names=TRUE))
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
@@ -118,7 +118,7 @@ for(i in 1:12)
 tw <- sort(tw)
 
 #load upscaled chelsa rasters
-obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmax"), pattern='tif', full.names=TRUE))
+obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmax"), pattern='\\.tif$', full.names=TRUE))
 projection(obs) <- CRS("+proj=longlat +datum=WGS84")
 plot(obs, main=month.name)
 
@@ -167,9 +167,9 @@ sum(unlist(lapply(tmax.ext[[6]], FUN=function(x){length(x)})) > 0)
 # dev <- abs(values(d) - median(values(d)))
 # d[rank(dev) > 779 & is_outlier(values(d), coef = 3)] <- NA
 
-###MONTHLY MEAN TEMPERATURES------------------------------------------------------
+###MONTHLY MEAN TEMPERATURES----------------------------------------------------
 ###Load bias files
-bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmean"), pattern='tif', full.names=TRUE))
+bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmean"), pattern='\\.tif$', full.names=TRUE))
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
@@ -198,7 +198,7 @@ for(i in 1:12)
 tw <- sort(tw)
 
 #load upscaled chelsa rasters
-obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmean"), pattern='tif', full.names=TRUE))
+obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmean"), pattern='\\.tif$', full.names=TRUE))
 projection(obs) <- CRS("+proj=longlat +datum=WGS84")
 plot(obs, main=month.name)
 

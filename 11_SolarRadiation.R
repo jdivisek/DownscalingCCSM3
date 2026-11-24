@@ -1,7 +1,8 @@
-###CREATE SOLAR RADIATION RASTERS FOR ENVIREM VARIABLES------------------------------------------------------------
+###CREATE SOLAR RADIATION RASTERS FOR ENVIREM VARIABLES-------------------------
 library(raster)
 library(envirem)
 library(palinsol)
+library(stringr)
 
 ##load chelsa grids as template
 ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/tmean"), pattern='sdat', full.names=TRUE)
@@ -11,6 +12,11 @@ projection(chelsa) <- CRS("+proj=longlat +datum=WGS84")
 
 tw <- seq(50,20950,100) #time windows up to 21,000 BP, each centered on 50 BP, 150 BP, etc.
 rasterOptions(tmpdir=paste0(getwd(), "/temp"))
+
+for(q in 1:12) {
+  dir.create(path = paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/", n[q], "_", month.abb[q]),
+             recursive = TRUE, showWarnings = FALSE)
+}
 
 for(i in seq(1, length(tw)))
 {

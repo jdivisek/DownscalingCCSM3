@@ -1,4 +1,4 @@
-###CALCULATE BIOCLIM AND ENVRIEM VARIABLES---------------------------------------------------------------------------------------------------------
+###CALCULATE BIOCLIM AND ENVIREM VARIABLES--------------------------------------
 library(raster)
 library(RSAGA)
 library(stringr)
@@ -7,18 +7,18 @@ library(envirem)
 ###paths to donwcaled layers
 ##mean temperature
 tmean.paths <- list()
-tmean.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/01_Jan"), pattern='tif', full.names=TRUE)
-tmean.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/02_Feb"), pattern='tif', full.names=TRUE)
-tmean.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/03_Mar"), pattern='tif', full.names=TRUE)
-tmean.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/04_Apr"), pattern='tif', full.names=TRUE)
-tmean.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/05_May"), pattern='tif', full.names=TRUE)
-tmean.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/06_Jun"), pattern='tif', full.names=TRUE)
-tmean.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/07_Jul"), pattern='tif', full.names=TRUE)
-tmean.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/08_Aug"), pattern='tif', full.names=TRUE)
-tmean.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/09_Sep"), pattern='tif', full.names=TRUE)
-tmean.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/10_Oct"), pattern='tif', full.names=TRUE)
-tmean.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/11_Nov"), pattern='tif', full.names=TRUE)
-tmean.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/12_Dec"), pattern='tif', full.names=TRUE)
+tmean.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/01_Jan"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/02_Feb"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/03_Mar"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/04_Apr"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/05_May"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/06_Jun"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/07_Jul"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/08_Aug"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/09_Sep"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/10_Oct"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/11_Nov"), pattern = '\\.tif$', full.names=TRUE)
+tmean.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/12_Dec"), pattern = '\\.tif$', full.names=TRUE)
 
 #sort paths
 for(i in 1:12)
@@ -30,18 +30,18 @@ for(i in 1:12)
 
 ##max temperature--------------------------------------------------------------------------
 tmax.paths <- list()
-tmax.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/01_Jan"), pattern='tif', full.names=TRUE)
-tmax.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/02_Feb"), pattern='tif', full.names=TRUE)
-tmax.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/03_Mar"), pattern='tif', full.names=TRUE)
-tmax.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/04_Apr"), pattern='tif', full.names=TRUE)
-tmax.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/05_May"), pattern='tif', full.names=TRUE)
-tmax.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/06_Jun"), pattern='tif', full.names=TRUE)
-tmax.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/07_Jul"), pattern='tif', full.names=TRUE)
-tmax.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/08_Aug"), pattern='tif', full.names=TRUE)
-tmax.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/09_Sep"), pattern='tif', full.names=TRUE)
-tmax.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/10_Oct"), pattern='tif', full.names=TRUE)
-tmax.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/11_Nov"), pattern='tif', full.names=TRUE)
-tmax.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/12_Dec"), pattern='tif', full.names=TRUE)
+tmax.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/01_Jan"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/02_Feb"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/03_Mar"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/04_Apr"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/05_May"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/06_Jun"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/07_Jul"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/08_Aug"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/09_Sep"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/10_Oct"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/11_Nov"), pattern = '\\.tif$', full.names=TRUE)
+tmax.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmax/12_Dec"), pattern = '\\.tif$', full.names=TRUE)
 
 #sort paths
 for(i in 1:12)
@@ -51,20 +51,20 @@ for(i in 1:12)
   # tmax.paths[[i]] <- split(tmax.paths[[i]], ceiling(seq_along(c(tmax.paths[[i]]))/10))
 }
 
-##min temperature-------------------------------------------------------------------------
+##min temperature---------------------------------------------------------------
 tmin.paths <- list()
-tmin.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/01_Jan"), pattern='tif', full.names=TRUE)
-tmin.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/02_Feb"), pattern='tif', full.names=TRUE)
-tmin.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/03_Mar"), pattern='tif', full.names=TRUE)
-tmin.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/04_Apr"), pattern='tif', full.names=TRUE)
-tmin.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/05_May"), pattern='tif', full.names=TRUE)
-tmin.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/06_Jun"), pattern='tif', full.names=TRUE)
-tmin.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/07_Jul"), pattern='tif', full.names=TRUE)
-tmin.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/08_Aug"), pattern='tif', full.names=TRUE)
-tmin.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/09_Sep"), pattern='tif', full.names=TRUE)
-tmin.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/10_Oct"), pattern='tif', full.names=TRUE)
-tmin.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/11_Nov"), pattern='tif', full.names=TRUE)
-tmin.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/12_Dec"), pattern='tif', full.names=TRUE)
+tmin.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/01_Jan"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/02_Feb"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/03_Mar"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/04_Apr"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/05_May"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/06_Jun"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/07_Jul"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/08_Aug"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/09_Sep"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/10_Oct"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/11_Nov"), pattern = '\\.tif$', full.names=TRUE)
+tmin.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmin/12_Dec"), pattern = '\\.tif$', full.names=TRUE)
 
 #sort paths
 for(i in 1:12)
@@ -74,20 +74,20 @@ for(i in 1:12)
   # tmin.paths[[i]] <- split(tmin.paths[[i]], ceiling(seq_along(c(tmin.paths[[i]]))/10))
 }
 
-##precipitation----------------------------------------------------------------------------
+##precipitation-----------------------------------------------------------------
 prec.paths <- list()
-prec.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/01_Jan"), pattern='tif', full.names=TRUE)
-prec.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/02_Feb"), pattern='tif', full.names=TRUE)
-prec.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/03_Mar"), pattern='tif', full.names=TRUE)
-prec.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/04_Apr"), pattern='tif', full.names=TRUE)
-prec.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/05_May"), pattern='tif', full.names=TRUE)
-prec.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/06_Jun"), pattern='tif', full.names=TRUE)
-prec.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/07_Jul"), pattern='tif', full.names=TRUE)
-prec.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/08_Aug"), pattern='tif', full.names=TRUE)
-prec.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/09_Sep"), pattern='tif', full.names=TRUE)
-prec.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/10_Oct"), pattern='tif', full.names=TRUE)
-prec.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/11_Nov"), pattern='tif', full.names=TRUE)
-prec.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/12_Dec"), pattern='tif', full.names=TRUE)
+prec.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/01_Jan"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/02_Feb"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/03_Mar"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/04_Apr"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/05_May"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/06_Jun"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/07_Jul"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/08_Aug"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/09_Sep"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/10_Oct"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/11_Nov"), pattern = '\\.tif$', full.names=TRUE)
+prec.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/12_Dec"), pattern = '\\.tif$', full.names=TRUE)
 
 #sort paths
 for(i in 1:12)
@@ -97,21 +97,21 @@ for(i in 1:12)
   # prec.paths[[i]] <- split(prec.paths[[i]], ceiling(seq_along(c(prec.paths[[i]]))/10))
 }
 
-##solar radiation------------------------------------------------------------------------------------
+##solar radiation---------------------------------------------------------------
 
 solrad.paths <- list()
-solrad.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/01_Jan"), pattern='tif', full.names=TRUE)
-solrad.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/02_Feb"), pattern='tif', full.names=TRUE)
-solrad.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/03_Mar"), pattern='tif', full.names=TRUE)
-solrad.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/04_Apr"), pattern='tif', full.names=TRUE)
-solrad.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/05_May"), pattern='tif', full.names=TRUE)
-solrad.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/06_Jun"), pattern='tif', full.names=TRUE)
-solrad.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/07_Jul"), pattern='tif', full.names=TRUE)
-solrad.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/08_Aug"), pattern='tif', full.names=TRUE)
-solrad.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/09_Sep"), pattern='tif', full.names=TRUE)
-solrad.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/10_Oct"), pattern='tif', full.names=TRUE)
-solrad.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/11_Nov"), pattern='tif', full.names=TRUE)
-solrad.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/12_Dec"), pattern='tif', full.names=TRUE)
+solrad.paths[[1]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/01_Jan"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[2]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/02_Feb"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[3]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/03_Mar"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[4]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/04_Apr"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[5]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/05_May"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[6]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/06_Jun"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[7]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/07_Jul"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[8]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/08_Aug"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[9]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/09_Sep"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[10]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/10_Oct"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[11]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/11_Nov"), pattern = '\\.tif$', full.names=TRUE)
+solrad.paths[[12]] <- list.files(path= paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/solrad/12_Dec"), pattern = '\\.tif$', full.names=TRUE)
 
 #sort paths
 for(i in 1:12)
@@ -121,27 +121,26 @@ for(i in 1:12)
   # solrad.paths[[i]] <- split(solrad.paths[[i]], ceiling(seq_along(c(solrad.paths[[i]]))/10))
 }
 
-#paths to folders for biclimatic variables
+#paths to folders for bioclim variables
 tw <- seq(50, 20950, 100) #define time windows
 bio.paths <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/bioclim/", tw, "BP")
 
-# for(i in seq(1, length(tw)))
-# {
-#   dir.create(path = bio.paths[i])
-# }
+for(i in seq(1, length(tw)))
+{
+  dir.create(path = bio.paths[i],recursive = TRUE, showWarnings = FALSE)
+}
 
 #paths to folders for envirem variables
 envi.paths <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/envirem/", tw, "BP")
 
-# for(i in seq(1, length(tw)))
-# {
-#   dir.create(path = envi.paths[i])
-# }
+for(i in seq(1, length(tw)))
+{
+  dir.create(path = envi.paths[i], recursive = TRUE, showWarnings = FALSE)
+}
 
-
-###CALCULATE BIOCLIM AND ENVIREM VARIABLES----------------------------------------------------------
+###CALCULATE BIOCLIM AND ENVIREM VARIABLES--------------------------------------
 #require SAGA GIS 6.3.0 to calculate bio12 as sum of monthly precipitation amounts 
-#SAGA 2.3.1 calculates bio12 as an arithmetic mean
+#SAGA 2.3.1 calculates bio12 as arithmetic mean
 
 saga.env <- rsaga.env()
 saga.env$path <- "C:/saga-6.3.0_x64"

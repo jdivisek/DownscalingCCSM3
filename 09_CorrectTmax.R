@@ -1,5 +1,5 @@
-###CORRECT EXTREME ANOMALIES IN MONTHLY MAXIMUM TEMPERATURE-------------------------------------------------------------
-#Here, extreme anomalies identified in the prevous step are corrected
+###CORRECT EXTREME ANOMALIES IN MONTHLY MAXIMUM TEMPERATURE---------------------
+#Here, extreme anomalies identified in the previous step are corrected
 #by excluding these values from interpolation
 
 library(raster)
@@ -15,11 +15,11 @@ source("./Functions/getAvgPoints.R")
 n <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
 ###load bias layers
-bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmax"), pattern='tif', full.names=TRUE))
+bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmax"), pattern='\\.tif$', full.names=TRUE))
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
-###DEBIASING AND DOWSCALING CCSM3 SIMULATIONS--------------------------------------------------------------------
+###DEBIASING AND DOWSCALING CCSM3 SIMULATIONS-----------------------------------
 m.paths <- list()
 m.paths[[1]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmax/01_Jan"), pattern='txt', full.names=TRUE)
 m.paths[[2]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmax/02_Feb"), pattern='txt', full.names=TRUE)
@@ -45,12 +45,12 @@ tw <- sort(tw)
 tw
 
 #load upscaled chelsa rasters
-obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmax"), pattern='tif', full.names=TRUE))
+obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmax"), pattern='\\.tif$', full.names=TRUE))
 projection(obs) <- CRS("+proj=longlat +datum=WGS84")
 plot(obs, main=month.name)
 
 #paths to fine-scale chelsa rasters
-ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/tmax"), pattern='sgrd', full.names=TRUE)
+ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/tmax"), pattern='\\.sgrd$', full.names=TRUE)
 
 #create target directories
 for(q in seq(1, 12))
@@ -108,6 +108,7 @@ for(q in 1:12)##loop for 12 months
       
       #extract anomalies to average points
       avg.points$delta <- raster::extract(d, avg.points[, c("X", "Y")])
+      avg.points <- avg.points[!is.na(avg.points$delta), ]
       
       sp <- SpatialPointsDataFrame(avg.points[, c("X", "Y")], avg.points, proj4string=CRS(projection(chelsa)))
       # plot(sp, add=T)

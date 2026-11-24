@@ -34,7 +34,7 @@ for(i in seq(1, length(tmin.paths)))
   filenames <- c(names(tmin.paths)[i], names(tmax.paths)[i])
   
   #calculate average
-  rsaga.geoprocessor("grid_calculus", 1, list(GRIDS=paste0(c(filenames, "land.mask.sgrd"), collapse = "; "), 
+  rsaga.geoprocessor("grid_calculus", 1, list(GRIDS=paste0(c(filenames, "mask.land.sgrd"), collapse = "; "), 
                                               RESULT="tmean.sgrd", 
                                               FORMULA="((g1 + g2)/2)*g3", NAME="tmean"), env=saga.env, show.output.on.console=F)
   
@@ -43,7 +43,7 @@ for(i in seq(1, length(tmin.paths)))
                                         OPTIONS="COMPRESS=DEFLATE PREDICTOR=2 ZLEVEL=6"), env=saga.env, show.output.on.console=F)
   
   #copy to GIS database
-  file.copy(paste0(saga.env$workspace, "/", gsub("tmin", "tmean", filenames[1])), paste0(getwd(), "/GIS_database/CHELSAcruts/1940-1950/tmean/"))
+  file.copy(paste0(saga.env$workspace, "/", gsub("tmin", "tmean", filenames[1])), paste0(getwd(), "/GIS_database/CHELSAcruts/tmean/"))
   
   #remove temporary files
   file.remove(list.files(saga.env$workspace, pattern="tmean", full.names = T))
@@ -160,7 +160,7 @@ Sys.time()
 
 
 
-####CALCULATE 50 YRS AVERAGE-----------------------------------------------------------------------------------
+####CALCULATE 50 YRS AVERAGE----------------------------------------------------
 
 saga.env <- rsaga.env()
 saga.env$path <- "C:/saga-6.3.0_x64"
@@ -178,7 +178,7 @@ saga.env$workspace <- paste0(getwd(), "/temp")
 n <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
 
-###Mean monthly temperature------------------------------------------------------------------------------------------
+###Mean monthly temperature-----------------------------------------------------
 for(i in 1:12)
 {
   print(i)
@@ -220,9 +220,8 @@ for(i in 1:12)
 }
 Sys.time()
 
-###Maximum monthly temperature------------------------------------------------------------------------------------------
-###For MAX and MIN temperatures, resulting rasters must be multiplied by land mask becasue origial chelsa rasters (tif) have
-##wrong NAvalue tag
+###Maximum monthly temperature--------------------------------------------------
+###For MAX and MIN temperatures, resulting rasters must be multiplied by land mask
 for(i in 1:12)
 {
   print(i)
@@ -246,7 +245,7 @@ for(i in 1:12)
   
   ##divide by 10
   rsaga.geoprocessor("grid_calculus", 1, list(GRIDS="mean50.sgrd; mask.land.sgrd", RESULT ="tmax.sgrd" ,
-                                              FORMULA="(g1*g6)/10", NAME="tmax"), env=saga.env, show.output.on.console=F)
+                                              FORMULA="(g1*g2)/10", NAME="tmax"), env=saga.env, show.output.on.console=F)
   
   #remove mean50
   file.remove(list.files(saga.env$workspace, pattern="mean50", full.names = T))
@@ -264,9 +263,8 @@ for(i in 1:12)
 }
 Sys.time()
 
-###Minimum monthly temperature------------------------------------------------------------------------------------------
-###For MAX and MIN temperatures, resulting rasters must be multiplied by land mask becasue origial chelsa rasters (tif) have
-##wrong NAvalue tag
+###Minimum monthly temperature--------------------------------------------------
+###For MAX and MIN temperatures, resulting rasters must be multiplied by land mask
 for(i in 1:12)
 {
   print(i)
@@ -290,7 +288,7 @@ for(i in 1:12)
   
   ##divide by 10
   rsaga.geoprocessor("grid_calculus", 1, list(GRIDS="mean50.sgrd; mask.land.sgrd", RESULT ="tmin.sgrd" ,
-                                              FORMULA="(g1*g6)/10", NAME="tmin"), env=saga.env, show.output.on.console=F)
+                                              FORMULA="(g1*g2)/10", NAME="tmin"), env=saga.env, show.output.on.console=F)
   
   #remove mean50
   file.remove(list.files(saga.env$workspace, pattern="mean50", full.names = T))
@@ -308,7 +306,7 @@ for(i in 1:12)
 }
 Sys.time()
 
-###Monthly precipitation------------------------------------------------------------------------------------------
+###Monthly precipitation--------------------------------------------------------
 for(i in 1:12)
 {
   print(i)

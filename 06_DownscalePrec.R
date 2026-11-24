@@ -1,4 +1,4 @@
-###DOWNSCALE MONTHLY PRECIPITATION-------------------------------------------------------------
+###DOWNSCALE MONTHLY PRECIPITATION----------------------------------------------
 library(raster)
 library(rgdal)
 library(fields)
@@ -12,7 +12,7 @@ n <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
 rasterOptions(tmpdir=paste0(getwd(), "/temp"))
 
-##Upscale CHELSA data to 2.5 degrees resolution--------------------------------------------------
+##Upscale CHELSA data to 2.5 degrees resolution---------------------------------
 ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/prec"), pattern='sdat', full.names=TRUE )
 ch.paths <- ch.paths[str_detect(ch.paths, pattern = ".sdat.", negate = T)]
 
@@ -24,7 +24,7 @@ for(i in seq(1, length(ch.paths)))
   #aggregate data to 2.5 degrees resolution
   cat("", "\n", "Aggregating to 2.5° resolution", "\n")
   ch <- raster(ch.paths[i], native=T)
-  ch.agr <- aggregate(ch, fact=300, fun=median, expland=F, na.rm=T, progress="text")#aggregate to 2.5 degrees - CCSM3 resolution
+  ch.agr <- aggregate(ch, fact=300, fun=median, expand=F, na.rm=T, progress="text")#aggregate to 2.5 degrees - CCSM3 resolution
   
   writeRaster(ch.agr, paste0(getwd(), "/GIS_database/CHELSA_upscaled/prec/prec", n[i], "avg.tif"), "GTiff")
   
@@ -47,12 +47,12 @@ m1965.paths <- c(paste0(getwd(), "/paleodata_months_Europe/prec/1940-1989/01_Jan
                  paste0(getwd(), "/paleodata_months_Europe/prec/1940-1989/11_Nov/grid_data_1965AD.txt"),
                  paste0(getwd(), "/paleodata_months_Europe/prec/1940-1989/12_Dec/grid_data_1965AD.txt"))
 
-o1965.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/prec"), pattern='tif', full.names=TRUE)
+o1965.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/prec"), pattern='\\.tif$', full.names=TRUE)
 
 month.lengths <- c(31, 28.25, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 names(month.lengths) <- month.abb
 
-##Create bias files---------------------------------------------------------------------------------
+##Create bias files-------------------------------------------------------------
 for(i in 1:12)
 {
   print(i)
@@ -80,11 +80,11 @@ for(i in 1:12)
   writeRaster(bias, paste0(getwd(), "/GIS_database/bias_files/prec/", "bias_prec", n[i], ".tif"), "GTiff")
 }
 
-bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/prec", sep = ""), pattern='tif', full.names=TRUE))
+bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/prec", sep = ""), pattern='\\.tif$', full.names=TRUE))
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
-###DEBIASING AND DOWSCALING CCSM3 MODELS--------------------------------------------------------------------
+###DEBIASING AND DOWSCALING CCSM3 MODELS----------------------------------------
 m.paths <- list()
 m.paths[[1]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/prec/01_Jan", sep = ""), pattern='txt', full.names=TRUE)
 m.paths[[2]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/prec/02_Feb", sep = ""), pattern='txt', full.names=TRUE)
@@ -109,18 +109,18 @@ for(i in 1:12)
 tw <- sort(tw)
 
 #load upscaled chelsa rasters
-obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/prec"), pattern='tif', full.names=TRUE))
+obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/prec"), pattern='\\.tif$', full.names=TRUE))
 projection(obs) <- CRS("+proj=longlat +datum=WGS84")
 plot(obs, main=month.name)
 
 #paths to fine-scale chelsa rasters
-ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/prec"), pattern='sgrd', full.names=TRUE)
+ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/prec"), pattern='\\.sgrd$', full.names=TRUE)
 
 #create target directories
 for(q in seq(1, 12))
 {
   dir.create(path = paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/", 
-                           n[q], "_", month.abb[q]))
+                           n[q], "_", month.abb[q]), recursive = TRUE, showWarnings = FALSE)
 }
 
 saga.env <- rsaga.env()
@@ -149,7 +149,7 @@ for(q in 1:12)##loop for 12 months
     print(paste("****************************", month.name[q], "precipitation for", tw[i], "BP ****************************", sep= " "))
     
     mod <- read.table(m.paths[[q]][i], header = F, dec = ".")#read PaleoView output
-    mod <- raster(as.matrix(mod[4:23,60:100])) #select region 12.5W - 55E, 72.5N-32.5N
+    mod <- raster(as.matrix(mod[4:23,60:100])) #select region 32.5W - 70E, 82.5N-32.5N
     extent(mod) <- extent(c(-32.5,70,32.5,82.5)) #set extent
     projection(mod) <- CRS("+proj=longlat +datum=WGS84") #set coordinate system
     # plot(mod, main = "Model - daily values")
@@ -192,7 +192,7 @@ for(q in 1:12)##loop for 12 months
     cat("", "\n", "Adding interpolated anomalies...", "\n")
     rsaga.geoprocessor("grid_calculus", 1, list(GRIDS=paste0(c(ch.paths[q], "delta_spline.sgrd"), collapse = "; "), 
                                                 RESULT= "downscaled.sgrd",
-                                                FORMULA="ifelse(g2 < 0, 0, g1 * g2)"), env=saga.env, show.output.on.console=T)
+                                                FORMULA="ifelse(g2 < 0, 0, g1 * g2)"), env=saga.env, show.output.on.console=F)
     
     filename <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/prec/", 
                        n[q], "_", month.abb[q], "/prec", n[q], "_", tw[i], "BP", ".tif")

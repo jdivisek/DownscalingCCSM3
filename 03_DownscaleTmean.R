@@ -1,4 +1,4 @@
-###DOWNSCALE MONTHLY MEAN TEMPERATURE-------------------------------------------------------------
+###DOWNSCALE MONTHLY MEAN TEMPERATURE-------------------------------------------
 
 library(raster)
 library(rgdal)
@@ -13,7 +13,7 @@ n <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
 rasterOptions(tmpdir=paste0(getwd(), "/temp"))
 
-##Upscale CHELSA data to 2.5 degrees resolution--------------------------------------------------
+##Upscale CHELSA data to 2.5 degrees resolution---------------------------------
 ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/tmean"), pattern='sdat', full.names=TRUE )
 ch.paths <- ch.paths[str_detect(ch.paths, pattern = ".sdat.", negate = T)]
 
@@ -24,7 +24,7 @@ for(i in seq(1, length(ch.paths)))
   #aggregate data to 2.5 degrees resolution
   cat("", "\n", "Aggregating to 2.5° resolution", "\n")
   ch <- raster(ch.paths[i], native=T)
-  ch.agr <- aggregate(ch, fact=300, fun=mean, expland=F, na.rm=T, progress="text")#aggregate to 2.5 degrees - CCSM3 resolution
+  ch.agr <- aggregate(ch, fact=300, fun=mean, expand=F, na.rm=T, progress="text")#aggregate to 2.5 degrees - CCSM3 resolution
   
   writeRaster(ch.agr, paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmean/tmean", n[i], "avg.tif"), "GTiff")
   
@@ -47,9 +47,9 @@ m1965.paths <- c(paste0(getwd(), "/paleodata_months_Europe/tmean/1940-1989/01_Ja
                  paste0(getwd(), "/paleodata_months_Europe/tmean/1940-1989/11_Nov/grid_data_1965AD.txt"),
                  paste0(getwd(), "/paleodata_months_Europe/tmean/1940-1989/12_Dec/grid_data_1965AD.txt"))
 
-o1965.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmean"), pattern='tif', full.names=TRUE)
+o1965.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmean"), pattern='\\.tif$', full.names=TRUE)
 
-##Create bias files---------------------------------------------------------------------------------
+##Create bias files-------------------------------------------------------------
 for(i in 1:12)
 {
   print(i)
@@ -69,14 +69,14 @@ for(i in 1:12)
   # plot(m1965+bias, main = "Model + bias")
   # plot(o1965, main = "Observed")
   
-  writeRaster(bias, paste0(getwd(), "/GIS_database/bias_files/", "bias_tmean", n[i], ".tif"), "GTiff")
+  writeRaster(bias, paste0(getwd(), "/GIS_database/bias_files/tmean/", "bias_tmean", n[i], ".tif"), "GTiff")
 }
 
-bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmean"), pattern='tif', full.names=TRUE))
+bias <- stack(list.files(path= paste0(getwd(), "/GIS_database/bias_files/tmean"), pattern='\\.tif$', full.names=TRUE))
 projection(bias) <- CRS("+proj=longlat +datum=WGS84")
 plot(bias, main=month.name)
 
-###DEBIASING AND DOWSCALING CCSM3 SIMULATIONS--------------------------------------------------------------------
+###DEBIASING AND DOWSCALING CCSM3 SIMULATIONS-----------------------------------
 m.paths <- list()
 m.paths[[1]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmean/01_Jan"), pattern='txt', full.names=TRUE)
 m.paths[[2]] <- list.files(path= paste0(getwd(), "/paleodata_months_Europe/tmean/02_Feb"), pattern='txt', full.names=TRUE)
@@ -101,18 +101,18 @@ for(i in 1:12)
 tw <- sort(tw)
 
 #load upscaled chelsa rasters
-obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmean"), pattern='tif', full.names=TRUE))
+obs <- stack(list.files(path= paste0(getwd(), "/GIS_database/CHELSA_upscaled/tmean"), pattern='\\.tif$', full.names=TRUE))
 projection(obs) <- CRS("+proj=longlat +datum=WGS84")
 plot(obs, main=month.name)
 
 #paths to fine-scale chelsa rasters
-ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/tmean"), pattern='sgrd', full.names=TRUE)
+ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/interpolated/tmean"), pattern='\\.sgrd$', full.names=TRUE)
 
 #create target directories
 for(q in seq(1, 12))
 {
   dir.create(path = paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/tmean/", 
-                           n[q], "_", month.abb[q]))
+                           n[q], "_", month.abb[q]), recursive = TRUE, showWarnings = FALSE)
 }
 
 saga.env <- rsaga.env()

@@ -1,4 +1,4 @@
-###DATA COMPRESSION-------------------------------------------------------------------------------
+###DATA COMPRESSION-------------------------------------------------------------
 library(raster)
 library(stringr)
 library(RSAGA)
@@ -10,33 +10,35 @@ bio.names <- paste0("bio", 1:19)
 
 for(i in 1:19)
 {
-  bio.paths[[i]] <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/bioclim_NoExtremes/", tw, "BP/", bio.names[i], "_", tw, "BP.sgrd")
+  bio.paths[[i]] <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/bioclim/", tw, "BP/", bio.names[i], "_", tw, "BP.sgrd")
 }
 
 envi.paths <- list()
 
-envi.names <- list.files(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/envirem/50BP", pattern="sgrd",full.names = F)
+envi.names <- list.files(paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/envirem/50BP"), pattern="\\.sgrd$", full.names = F)
 envi.names <- unlist(lapply(str_split(envi.names, "_"), FUN=function(x){x[1]}))
 
 for(i in seq(1, length(envi.names)))
 {
-  envi.paths[[i]] <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/envirem_NoExtremes/", tw, "BP/", envi.names[i], "_", tw, "BP.sgrd")
+  envi.paths[[i]] <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/envirem/", tw, "BP/", envi.names[i], "_", tw, "BP.sgrd")
 }
 
 ###create folders for output data
 ##bioclim
 for(i in seq(1, length(bio.names)))
 {
-  dir.create(path = paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/FOR_SHARING/", bio.names[i]))
+  dir.create(path = paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/FOR_SHARING/", bio.names[i]),
+             recursive = TRUE, showWarnings = FALSE)
 }
 
 #envirem
 for(i in seq(1, length(envi.names)))
 {
-  dir.create(path = paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/FOR_SHARING/", envi.names[i]))
+  dir.create(path = paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/FOR_SHARING/", envi.names[i]),
+             recursive = TRUE, showWarnings = FALSE)
 }
 
-###COMPRESS BIOCLIM VARIABLES-----------------------------------------------------------------------
+###COMPRESS BIOCLIM VARIABLES---------------------------------------------------
 
 saga.env <- rsaga.env()
 saga.env$path <- "C:/saga-6.3.0_x64"
@@ -82,7 +84,7 @@ for(q in seq(1, length(bio.names)))
 }
 Sys.time()
 
-###COMPRESS ENVIREM------------------------------------------------------------------------------------------------
+###COMPRESS ENVIREM-------------------------------------------------------------
 mask.paths <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/land_masks/mask.land_", tw, "BP.sgrd")
 
 multiplier <- c(1,10,1000,10,1,1,1,10,10,1,1,1,1,1,1,1) #define scaling factor

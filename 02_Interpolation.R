@@ -1,6 +1,5 @@
 ###INTERPOLATE TEMPERATURES AND PRECIPITATION IN AREAS CURRENTLY UNDER THE SEA LEVEL-------------------------------------------------------
 library(raster)
-library(rgdal)
 library(RSAGA)
 library(stringr)
 
@@ -20,8 +19,8 @@ n <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
 mask.land <- paste0(getwd(), "/dem/mask_1940-1989.sgrd") #land mask for current period with valoue of 1 for land areas
 
-###MEAN MONTHLY TEMPERATURE---------------------------------------------------------------------------------------
-ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/tmean/"), pattern='sgrd', full.names=TRUE )
+###MEAN MONTHLY TEMPERATURE-----------------------------------------------------
+ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/tmean/"), pattern = '\\.sgrd$', full.names=TRUE )
 
 for(i in 1:12)
 {
@@ -51,8 +50,8 @@ for(i in 1:12)
   file.remove(list.files(saga.env$workspace, pattern = "spline", full.names = T))
 }
 
-###MIN MONTHLY TEMPERATURE---------------------------------------------------------------------------------------
-ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/tmin/"), pattern='sgrd', full.names=TRUE )
+###MIN MONTHLY TEMPERATURE------------------------------------------------------
+ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/tmin/"), pattern = '\\.sgrd$', full.names=TRUE )
 
 for(i in 1:12)
 {
@@ -82,8 +81,8 @@ for(i in 1:12)
   file.remove(list.files(saga.env$workspace, pattern = "spline", full.names = T))
 }
 
-###MAX MONTHLY TEMPERATURE---------------------------------------------------------------------------------------
-ch.paths <- list.files(path= "//ha-bay.ics.muni.cz/Homes/Shared/vegsci/GIS_database/CHELSA 1940-1989/tmax/", pattern='sgrd', full.names=TRUE )
+###MAX MONTHLY TEMPERATURE------------------------------------------------------
+ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/tmax/"), pattern='\\.sgrd$', full.names=TRUE )
 
 for(i in 1:12)
 {
@@ -113,8 +112,8 @@ for(i in 1:12)
   file.remove(list.files(saga.env$workspace, pattern = "spline", full.names = T))
 }
 
-###PRECIPITATION---------------------------------------------------------------------------------------
-ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/prec/"), pattern='sgrd', full.names=TRUE )
+###PRECIPITATION----------------------------------------------------------------
+ch.paths <- list.files(path= paste0(getwd(), "/GIS_database/CHELSA 1940-1989/prec/"), pattern = '\\.sgrd$', full.names=TRUE )
 
 for(i in 1:12)
 {

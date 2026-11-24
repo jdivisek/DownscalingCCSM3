@@ -1,10 +1,10 @@
-###CORRECT NEGATIVE VALUES IN BIO2 AND BIO3---------------------------------------------------------------
+###CORRECT NEGATIVE VALUES IN BIO2 AND BIO3-------------------------------------
 ##and compress corrected layers
 library(raster)
 library(stringr)
 library(RSAGA)
 
-###Correct bio2-------------------------------------------------------------------------------------------
+###Correct bio2-----------------------------------------------------------------
 tw <- seq(50, 20950, 100)
 
 bio.paths <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/bioclim/", tw, "BP/bio2_", tw, "BP.sgrd")
@@ -47,7 +47,7 @@ for(i in seq(1, length(tw)))
   file.remove(list.files("./temp", pattern="bio2", full.names = T))
 }
 
-###Correct bio3--------------------------------------------------------------------------------
+###Correct bio3-----------------------------------------------------------------
 tw <- seq(50, 20950, 100)
 
 bio.paths <- paste0(getwd(), "/GIS_database/Paleoclimates_CCSM3/SAGA/bioclim/", tw, "BP/bio3_", tw, "BP.sgrd")
