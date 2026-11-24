@@ -1,4 +1,4 @@
-# Downscaling CCSM3 simulations
+# R codes for statistical downscaling of CCSM3 (TraCE-21ka) paleoclimate simulations for Europe
 
 Here, I provide R codes for downscaling and debiasing CCSM3 simulations of monthly minimum, mean and maximum temperatures and precipitation amounts for centennial windows up to 21,000 BP. These downscaled simulations were then used to calculate BIOCLIM (Nix, 1986) and ENVIREM (Title & Bemmels, 2018) variables for each window. These grids are provided [here](https://zenodo.org/records/5119958).
 
